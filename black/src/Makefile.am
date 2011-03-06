@@ -1,0 +1,19 @@
+lib_LTLIBRARIES = libblack.la
+
+libblack_la_SOURCES = \
+	BlackEngine.cpp \
+	FileImageTexture.cpp \
+	FrameBuffer.cpp \
+	GameObject.cpp \
+	GraphicsContext.cpp \
+	HashedString.cpp \
+	Message.cpp \
+	ObjectManager.cpp \
+	Rect.cpp \
+	Shader.cpp \
+	Texture.cpp \
+	Utils.cpp \
+	Vector.cpp
+
+libblack_la_CXXFLAGS = -I../include @SDL_CFLAGS@
+libblack_la_LDFLAGS = @SDL_LIBS@
