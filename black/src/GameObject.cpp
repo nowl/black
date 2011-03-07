@@ -1,9 +1,11 @@
 #include "Black.h"
 
-GameObject::GameObject()
-    : Renderer(NULL)
+using namespace std;
+
+GameObject::GameObject(const std::string name)
+    : Renderer(NULL), Name(name)
 {
-    BlackEngine::get()->getObjectManager()->addManagedObject(this);
+    BlackEngine::get()->getActiveGameState()->addManagedObject(this);
 }
 
 GameObject::~GameObject()
@@ -25,12 +27,6 @@ GameObject::setRenderer(IRenderable *renderer)
 }
 
 void
-GameObject::setID(unsigned int id)
-{
-    ID = id;
-}
-
-void
 GameObject::update(GameObject *obj, unsigned int tick)
 {
 
@@ -41,3 +37,16 @@ GameObject::receive(const Message& message)
 {
     return false;
 }
+
+string
+GameObject::getName() const
+{
+    return Name.getString();
+}
+
+unsigned long 
+GameObject::getHash() const
+{
+    return Name.getHash();
+}
+

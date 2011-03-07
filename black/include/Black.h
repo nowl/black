@@ -16,6 +16,7 @@
 
 #include "HashedString.h"
 #include "GraphicsContext.h"
+#include "GameState.h"
 #include "ObjectManager.h"
 #include "GrowableString.h"
 #include "Shader.h"

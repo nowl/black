@@ -1,18 +1,26 @@
 #include "Black.h"
 
+using namespace std;
+
+const unsigned int BlackEngine::DEFAULT_FRAMESKIP = 5;
+const unsigned int BlackEngine::DEFAULT_TICKS_PER_SECOND = 30;
+
 BlackEngine* BlackEngine::Instance = NULL;
 
 BlackEngine::BlackEngine()
-    : IsRunning(true), MaxFrameSkip(5), TicksPerSecond(30),
+    : IsRunning(true), MaxFrameSkip(DEFAULT_FRAMESKIP),
+      TicksPerSecond(DEFAULT_TICKS_PER_SECOND),
       MillisecondsPerTick(1000.0 / TicksPerSecond),
-      GraphicsCon(NULL)
+      GraphicsCon(NULL), ActiveGameState(NULL)
 {
-    ObjectMan = new ObjectManager();
 }
 
 BlackEngine::~BlackEngine()
 {
-    delete ObjectMan;
+    GameStatesIter iter;
+    iter = GameStates.begin();
+    for(; iter != GameStates.end(); iter++)
+        delete iter->second;
 
     if(GraphicsCon)
         delete GraphicsCon;
@@ -27,10 +35,31 @@ BlackEngine::get()
     return Instance;
 }
 
-ObjectManager*
-BlackEngine::getObjectManager()
+void
+BlackEngine::switchGameState(const string name)
 {
-    return ObjectMan;
+    ActiveGameState = getGameState(name);
+}
+
+GameState *
+BlackEngine::getActiveGameState()
+{
+    return ActiveGameState;
+}
+
+GameState*
+BlackEngine::getGameState(const string name)
+{
+    GameStatesIter iter = GameStates.find(name);
+    if(iter == GameStates.end())
+    {
+        // doesn't exist, create this gamestate and return it
+        GameState *gs = new GameState(name); 
+        GameStates[name] = gs;
+        return gs;
+    }
+
+    return GameStates[name];
 }
 
 GraphicsContext*
@@ -61,27 +90,21 @@ BlackEngine::setTicksPerSecond(unsigned long val)
 void
 BlackEngine::mainloop()
 {
-    //event_queue_init();
-
-    //game_manager_start(manager);
-
+    // TODO: check for ActiveGameState and possibly throw an exception
+    
     unsigned long next_game_tick = getMilliseconds();
-
-        //unsigned long fps_counter = 0;
-        //unsigned long game_tick = 0;
-        //unsigned long fps_start_time = black_sdl_get_tick();
 
     glMatrixMode( GL_MODELVIEW );
 
     while(IsRunning)
     {
         handleEvents();
-
+        
         int loops = 0;
         unsigned long tick = getMilliseconds();
         while(tick > next_game_tick && loops < MaxFrameSkip)
         {
-            getObjectManager()->update(next_game_tick);
+            ActiveGameState->update(next_game_tick);
 
             next_game_tick += MillisecondsPerTick;
             loops++;
@@ -94,20 +117,8 @@ BlackEngine::mainloop()
         float interpolation = (tick + MillisecondsPerTick - next_game_tick)/MillisecondsPerTick;
         render(interpolation);
 
-         //       ++fps_counter;
-         /*
-                if(black_sdl_get_tick() - fps_start_time > 1000)
-                {
-            manager->fps = fps_counter;
-                        fps_counter = 0;
-                        fps_start_time = black_sdl_get_tick();
-                }
-        */
-
         SDL_GL_SwapBuffers();
     }
-
-    //event_queue_destroy();
 }
 
 void
@@ -120,14 +131,14 @@ BlackEngine::handleEvents()
         // broadcast message
         Message message("sdl-event", &event);
 
-        getObjectManager()->sendASync(message);
+        ActiveGameState->sendASync(message);
     }
 }
 
 void
 BlackEngine::render(float interpolation)
 {
-    getObjectManager()->render(interpolation);
+    ActiveGameState->render(interpolation);
 }
 
 bool
@@ -140,4 +151,10 @@ BlackEngine::initGraphicsContext(unsigned int width, unsigned int height, bool f
     }
 
     return false;
+}
+
+void
+BlackEngine::setKeyRepeat(unsigned long initial, unsigned long delay)
+{
+    SDL_EnableKeyRepeat(initial, delay);
 }

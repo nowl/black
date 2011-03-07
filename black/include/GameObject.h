@@ -2,16 +2,18 @@
 #define __GAME_OBJECT_H__
 
 #include <map>
+#include <string>
 #include <vector>
 
 template<int N, class T> class vect;
 class IRenderable;
 class Message;
+class HashedString;
 
 class GameObject
 {
 public:
-    GameObject();
+    GameObject(const std::string name);
     virtual ~GameObject();
 
     void getScreenLoc(vect<2, float>& loc);
@@ -19,7 +21,8 @@ public:
     void getWorldLoc(vect<2, float>& loc);
     void setWorldLoc(const vect<2, float>& loc);
     void invalidate();
-    void setID(unsigned int id);
+    std::string getName() const;
+    unsigned long getHash() const;
     void setRenderer(IRenderable *renderer);
 
     virtual void update(GameObject *obj, unsigned int tick);
@@ -27,8 +30,8 @@ public:
     virtual void render(GraphicsContext &context, float interpolation);
 
 protected:
-    unsigned int ID;
     IRenderable *Renderer;
+    HashedString Name;
 };
 
 #endif // __GAME_OBJECT_H__

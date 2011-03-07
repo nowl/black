@@ -167,10 +167,13 @@ int main(int argc, char *argv[])
 {
     srand(time(NULL));
 
-    GraphicsContext gc(1024, 1024, false);
+    BlackEngine *engine = BlackEngine::get();
+    engine->initGraphicsContext(1024, 1024, false);
+    GraphicsContext& gc = *(engine->getGraphicsContext());
+    engine->switchGameState("play-state");
 
     vector<IRenderable*> renderers;
-    GameObject foo;
+    GameObject foo("foo");
     foo.setRenderer(new FooRenderer());
 
     float rad = 1;

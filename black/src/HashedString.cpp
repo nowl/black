@@ -8,11 +8,26 @@ using namespace std;
 map<unsigned long, string> HashedString::ReverseMappings;
 #endif
 
+void
+HashedString::fillReverseMappings()
+{
+    ReverseMappings[mHash] = mString;
+}
+
+HashedString::HashedString(const string& string)
+    : mString(string), mHash( hash(string.c_str()) )
+{
+#ifdef LOG_MESSAGES
+    fillReverseMappings();
+#endif
+}
+
+
 HashedString::HashedString(const char * string)
     : mString(string), mHash( hash(string) )
 {
 #ifdef LOG_MESSAGES
-    ReverseMappings[mHash] = mString;
+    fillReverseMappings();
 #endif
 }
 

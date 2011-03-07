@@ -313,7 +313,7 @@ public:
 class FooObject : public GameObject
 {
 public:
-    FooObject() : dx(0), dy(0), dz(0) {}
+    FooObject() : dx(0), dy(0), dz(0), GameObject("foo1") {}
 
     virtual bool receive(const Message& message)
     {
@@ -379,12 +379,13 @@ int main(int argc, char *argv[])
     engine->initGraphicsContext(1280, 1024, false);
     engine->getGraphicsContext()->setOrthoView(Rect(0, 1280, 0, 1024));
     engine->getGraphicsContext()->setViewport(0, 0, 1280, 1024);
+    engine->switchGameState("play-state");
 
     HexRenderer renderer(200, 200, 0, 40);
     FooObject foo;
     foo.setRenderer(&renderer);
 
-    engine->getObjectManager()->registerBroadcastReceiver("sdl-event", &foo);
+    engine->getActiveGameState()->registerBroadcastReceiver("sdl-event", &foo);
 
     engine->mainloop();
 

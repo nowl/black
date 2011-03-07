@@ -3,7 +3,6 @@
 using namespace std;
 
 ObjectManager::ObjectManager()
-    : nextID(0)
 {
 }
 
@@ -16,17 +15,22 @@ ObjectManager::~ObjectManager()
 }
 
 GameObject*
-ObjectManager::getObject(unsigned int id)
+ObjectManager::getObject(unsigned long hash)
 {
-    return Objects[id];
+    return Objects[hash];
+}
+
+GameObject*
+ObjectManager::getObject(std::string name)
+{
+    HashedString hs(name);
+    return Objects[hs.getHash()];
 }
 
 void
 ObjectManager::addManagedObject(GameObject *obj)
 {
-    obj->setID(nextID);
-    Objects[nextID] = obj;
-    ++nextID;
+    Objects[obj->getHash()] = obj;
 }
 
 void

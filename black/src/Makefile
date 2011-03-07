@@ -72,9 +72,10 @@ am_libblack_la_OBJECTS = libblack_la-BlackEngine.lo \
 	libblack_la-FileImageTexture.lo libblack_la-FrameBuffer.lo \
 	libblack_la-GameObject.lo libblack_la-GraphicsContext.lo \
 	libblack_la-HashedString.lo libblack_la-Message.lo \
-	libblack_la-ObjectManager.lo libblack_la-Rect.lo \
-	libblack_la-Shader.lo libblack_la-Texture.lo \
-	libblack_la-Utils.lo libblack_la-Vector.lo
+	libblack_la-GameState.lo libblack_la-ObjectManager.lo \
+	libblack_la-Rect.lo libblack_la-Shader.lo \
+	libblack_la-Texture.lo libblack_la-Utils.lo \
+	libblack_la-Vector.lo
 libblack_la_OBJECTS = $(am_libblack_la_OBJECTS)
 libblack_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(libblack_la_CXXFLAGS) \
@@ -211,7 +212,7 @@ mandir = ${datarootdir}/man
 mkdir_p = /bin/mkdir -p
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr/local
+prefix = /home/nowl/install
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -231,6 +232,7 @@ libblack_la_SOURCES = \
 	GraphicsContext.cpp \
 	HashedString.cpp \
 	Message.cpp \
+	GameState.cpp \
 	ObjectManager.cpp \
 	Rect.cpp \
 	Shader.cpp \
@@ -318,6 +320,7 @@ include ./$(DEPDIR)/libblack_la-BlackEngine.Plo
 include ./$(DEPDIR)/libblack_la-FileImageTexture.Plo
 include ./$(DEPDIR)/libblack_la-FrameBuffer.Plo
 include ./$(DEPDIR)/libblack_la-GameObject.Plo
+include ./$(DEPDIR)/libblack_la-GameState.Plo
 include ./$(DEPDIR)/libblack_la-GraphicsContext.Plo
 include ./$(DEPDIR)/libblack_la-HashedString.Plo
 include ./$(DEPDIR)/libblack_la-Message.Plo
@@ -397,6 +400,13 @@ libblack_la-Message.lo: Message.cpp
 #	source='Message.cpp' object='libblack_la-Message.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libblack_la_CXXFLAGS) $(CXXFLAGS) -c -o libblack_la-Message.lo `test -f 'Message.cpp' || echo '$(srcdir)/'`Message.cpp
+
+libblack_la-GameState.lo: GameState.cpp
+	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libblack_la_CXXFLAGS) $(CXXFLAGS) -MT libblack_la-GameState.lo -MD -MP -MF $(DEPDIR)/libblack_la-GameState.Tpo -c -o libblack_la-GameState.lo `test -f 'GameState.cpp' || echo '$(srcdir)/'`GameState.cpp
+	$(am__mv) $(DEPDIR)/libblack_la-GameState.Tpo $(DEPDIR)/libblack_la-GameState.Plo
+#	source='GameState.cpp' object='libblack_la-GameState.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libblack_la_CXXFLAGS) $(CXXFLAGS) -c -o libblack_la-GameState.lo `test -f 'GameState.cpp' || echo '$(srcdir)/'`GameState.cpp
 
 libblack_la-ObjectManager.lo: ObjectManager.cpp
 	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libblack_la_CXXFLAGS) $(CXXFLAGS) -MT libblack_la-ObjectManager.lo -MD -MP -MF $(DEPDIR)/libblack_la-ObjectManager.Tpo -c -o libblack_la-ObjectManager.lo `test -f 'ObjectManager.cpp' || echo '$(srcdir)/'`ObjectManager.cpp

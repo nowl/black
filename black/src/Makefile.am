@@ -8,6 +8,7 @@ libblack_la_SOURCES = \
 	GraphicsContext.cpp \
 	HashedString.cpp \
 	Message.cpp \
+	GameState.cpp \
 	ObjectManager.cpp \
 	Rect.cpp \
 	Shader.cpp \

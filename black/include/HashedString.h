@@ -9,6 +9,7 @@
 class HashedString
 {
 public:
+    HashedString(const std::string& string);
 	HashedString(const char * string);
 
 	unsigned long getHash() const { return mHash; }
@@ -26,8 +27,8 @@ private:
 
 #ifdef LOG_MESSAGES
 	static std::map<unsigned long, std::string> ReverseMappings;
+    void fillReverseMappings();
 #endif
-
 };
 
 #endif // __HASHED_STRING_H__

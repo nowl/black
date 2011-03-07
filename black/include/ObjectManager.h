@@ -2,6 +2,7 @@
 #define __OBJECT_MANAGER_H__
 
 #include <map>
+#include <string>
 #include <vector>
 
 class GameObject;
@@ -10,12 +11,13 @@ class Message;
 class ObjectManager
 {
 public:
-    typedef std::map<unsigned int, GameObject*>::iterator ObjectIter;
+    typedef std::map<unsigned long, GameObject*>::iterator ObjectIter;
 
     ObjectManager();
     ~ObjectManager();
 
-    GameObject* getObject(unsigned int id);
+    GameObject* getObject(unsigned long hash);
+    GameObject* getObject(std::string name);
 
     void addManagedObject(GameObject *obj);
 
@@ -34,10 +36,9 @@ private:
 
     void deliverMessages();
 
-    std::map<unsigned int, GameObject*> Objects;
+    std::map<unsigned long, GameObject*> Objects;
     std::vector<Message> Messages;
     std::map<unsigned long, std::vector<GameObject *> > BroadcastReceivers;
-    unsigned int nextID;
 };
 
 #endif    // __OBJECT_MANAGER_H__
