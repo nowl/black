@@ -25,6 +25,7 @@
 #include "Texture.h"
 #include "FileImageTexture.h"
 #include "GameObject.h"
+#include "Camera.h"
 #include "FrameBuffer.h"
 #include "Vector.h"
 #include "BlackEngine.h"

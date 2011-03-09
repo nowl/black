@@ -11,7 +11,8 @@ BlackEngine::BlackEngine()
     : IsRunning(true), MaxFrameSkip(DEFAULT_FRAMESKIP),
       TicksPerSecond(DEFAULT_TICKS_PER_SECOND),
       MillisecondsPerTick(1000.0 / TicksPerSecond),
-      GraphicsCon(NULL), ActiveGameState(NULL)
+      GraphicsCon(NULL), ActiveGameState(NULL),
+      Cam(NULL)
 {
 }
 
@@ -112,8 +113,8 @@ BlackEngine::mainloop()
             tick = getMilliseconds();
         }
 
-        glClear(GL_COLOR_BUFFER_BIT);
-
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+        
         float interpolation = (tick + MillisecondsPerTick - next_game_tick)/MillisecondsPerTick;
         render(interpolation);
 
@@ -157,4 +158,16 @@ void
 BlackEngine::setKeyRepeat(unsigned long initial, unsigned long delay)
 {
     SDL_EnableKeyRepeat(initial, delay);
+}
+
+void
+BlackEngine::setCamera(Camera *camera)
+{
+    Cam = camera;
+}
+
+Camera *
+BlackEngine::getCamera()
+{
+    return Cam;
 }

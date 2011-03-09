@@ -11,6 +11,7 @@ public:
 
     void setViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
     void setOrthoView(const Rect& rect);
+    void setPerspectiveView(double fovy, double aspect, double zNear, double zFar);
 
 private:
     unsigned int width, height;

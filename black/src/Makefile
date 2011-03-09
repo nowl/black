@@ -241,7 +241,7 @@ libblack_la_SOURCES = \
 	Vector.cpp
 
 libblack_la_CXXFLAGS = -I../include -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
-libblack_la_LDFLAGS = -L/usr/lib -lSDL -lpthread
+libblack_la_LDFLAGS = -L/usr/lib -lSDL -lpthread -lSDL_mixer -lSDL_image -lSDL_ttf -lGL
 all: all-am
 
 .SUFFIXES:

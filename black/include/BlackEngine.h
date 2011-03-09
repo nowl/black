@@ -25,6 +25,9 @@ public:
     bool initGraphicsContext(unsigned int width, unsigned int height, bool fullscreen);
     void setKeyRepeat(unsigned long initial, unsigned long delay);
 
+    void setCamera(Camera *camera);
+    Camera *getCamera();
+
     bool IsRunning;
 
 private:
@@ -44,6 +47,7 @@ private:
 	GameState *ActiveGameState;
 
     GraphicsContext *GraphicsCon;
+    Camera *Cam;
 
     unsigned int MaxFrameSkip, TicksPerSecond;
     float MillisecondsPerTick;

@@ -48,13 +48,20 @@ void
 ObjectManager::render(float interpolation)
 {
     GraphicsContext *gc = BlackEngine::get()->getGraphicsContext();
+    Camera *camera = BlackEngine::get()->getCamera();
     ObjectIter iter = Objects.begin();
     for(; iter != Objects.end(); iter++)
     {
         GameObject *obj = iter->second;
 
         glPushMatrix();
+        
+        glLoadIdentity();
 
+        // set up view if available
+        if(camera)
+            camera->setView();
+        
         obj->render(*gc, interpolation);
 
         glPopMatrix();

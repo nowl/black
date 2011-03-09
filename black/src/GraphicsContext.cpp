@@ -57,13 +57,14 @@ GraphicsContext::setVideoMode()
 
 
     glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
-    glClear( GL_COLOR_BUFFER_BIT );
 
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glEnable(GL_DEPTH_TEST);
 }
 
 GraphicsContext::~GraphicsContext()
@@ -96,6 +97,14 @@ GraphicsContext::setOrthoView(const Rect& rect)
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
     glOrtho(rect.left, rect.right, rect.top, rect.bottom, -1.0f, 1.0f);
+}
+
+void
+GraphicsContext::setPerspectiveView(double fovy, double aspect, double zNear, double zFar)
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+    gluPerspective(fovy, aspect, zNear, zFar);
 }
 
 void

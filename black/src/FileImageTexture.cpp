@@ -6,15 +6,15 @@ FileImageTexture::FileImageTexture(const char *filename)
     GLenum texture_format;
     GLint  nOfColors;
 
-    if ( (surface = SDL_LoadBMP(filename)) ) {
+    if ( (surface = IMG_Load(filename)) ) {
         // Check that the image's width is a power of 2
         if ( (surface->w & (surface->w - 1)) != 0 ) {
-            printf("warning: image.bmp's width is not a power of 2\n");
+            printf("warning: %s's width is not a power of 2\n", filename);
         }
 
         // Also check if the height is a power of 2
         if ( (surface->h & (surface->h - 1)) != 0 ) {
-            printf("warning: image.bmp's height is not a power of 2\n");
+            printf("warning: %s's height is not a power of 2\n", filename);
         }
 
         // get the number of channels in the SDL surface
@@ -53,7 +53,7 @@ FileImageTexture::FileImageTexture(const char *filename)
                     texture_format, GL_UNSIGNED_BYTE, surface->pixels );
     }
     else {
-        printf("SDL could not load image.bmp: %s\n", SDL_GetError());
+        printf("SDL could not load %s: %s\n", filename, SDL_GetError());
         SDL_Quit();
     }
 
