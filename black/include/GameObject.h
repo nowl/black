@@ -23,7 +23,7 @@ public:
     void invalidate();
     std::string getName() const;
     unsigned long getHash() const;
-    void setRenderer(IRenderable *renderer);
+    void setRenderer(IRenderable *renderer, bool owns = true);
 
     virtual void update(GameObject *obj, unsigned int tick);
     virtual bool receive(const Message& message);
@@ -32,6 +32,7 @@ public:
 protected:
     IRenderable *Renderer;
     HashedString Name;
+    bool OwnsRenderer;
 };
 
 #endif // __GAME_OBJECT_H__

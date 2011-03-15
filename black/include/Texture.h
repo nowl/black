@@ -9,8 +9,8 @@ public:
         glDeleteTextures( 1, &texture );
     }
 
-    void bind();
-    void unbind();
+    void bind() const;
+    void unbind() const;
 
 protected:
     GLuint texture;

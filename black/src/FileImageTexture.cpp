@@ -51,6 +51,8 @@ FileImageTexture::FileImageTexture(const char *filename)
         // Edit the texture object's image data using the information SDL_Surface gives us
         glTexImage2D( GL_TEXTURE_2D, 0, nOfColors, surface->w, surface->h, 0,
                     texture_format, GL_UNSIGNED_BYTE, surface->pixels );
+
+        printf("read image file \"%s\" as texture %d\n", filename, texture);
     }
     else {
         printf("SDL could not load %s: %s\n", filename, SDL_GetError());

@@ -1,13 +1,13 @@
 #include "Black.h"
 
-void Texture::bind()
+void Texture::bind() const
 {
     //glLoadIdentity();
     glEnable( GL_TEXTURE_2D );
     glBindTexture( GL_TEXTURE_2D, texture );
 }
 
-void Texture::unbind()
+void Texture::unbind() const
 {
     glDisable( GL_TEXTURE_2D );
 }

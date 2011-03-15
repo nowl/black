@@ -10,7 +10,8 @@ GameObject::GameObject(const std::string name)
 
 GameObject::~GameObject()
 {
-
+    if(Renderer && OwnsRenderer)
+        delete Renderer;
 }
 
 void
@@ -21,8 +22,12 @@ GameObject::render(GraphicsContext &context, float interpolation)
 }
 
 void
-GameObject::setRenderer(IRenderable *renderer)
+GameObject::setRenderer(IRenderable *renderer, bool owns)
 {
+    if(Renderer && OwnsRenderer)
+        delete Renderer;
+
+    OwnsRenderer = owns;
     Renderer = renderer;
 }
 

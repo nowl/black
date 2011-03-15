@@ -30,7 +30,12 @@ ObjectManager::getObject(std::string name)
 void
 ObjectManager::addManagedObject(GameObject *obj)
 {
-    Objects[obj->getHash()] = obj;
+    unsigned int hash = obj->getHash();
+
+    if(Objects.find(hash) != Objects.end())
+        delete Objects[hash];
+
+    Objects[hash] = obj;
 }
 
 void
