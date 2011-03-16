@@ -1,7 +1,11 @@
 *~
 autom4te.cache
 *.m4
-config.*
+config.guess
+config.h
+config.h.in
+config.log
+config.status
 *.in
 libtool
 ltmain.sh
