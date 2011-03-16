@@ -1,7 +1,6 @@
 *~
 autom4te.cache
 *.m4
-config.guess
 config.h
 config.h.in
 config.log
