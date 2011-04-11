@@ -18,7 +18,12 @@ public:
 	GameState *getGameState(const std::string name);
 	GameState *getActiveGameState();
 	void switchGameState(const std::string name);
+
     GraphicsContext* getGraphicsContext();
+    PickManager *getPickManager();
+
+    void setFieldOfVision(float fieldOfVision);
+    float getFieldOfVision();
 
     void setMaxFrameSkip(unsigned long val);
     void setTicksPerSecond(unsigned long val);
@@ -27,6 +32,8 @@ public:
 
     void setCamera(Camera *camera);
     Camera *getCamera();
+
+    void render(float interpolation);
 
     bool IsRunning;
 
@@ -38,7 +45,6 @@ private:
     BlackEngine operator=(const BlackEngine&);
 
     void handleEvents();
-    void render(float interpolation);
 
     static BlackEngine *Instance;
 
@@ -48,6 +54,8 @@ private:
 
     GraphicsContext *GraphicsCon;
     Camera *Cam;
+
+    float FieldOfVision;
 
     unsigned int MaxFrameSkip, TicksPerSecond;
     float MillisecondsPerTick;

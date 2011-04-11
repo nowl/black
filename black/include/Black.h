@@ -28,6 +28,7 @@
 #include "Camera.h"
 #include "FrameBuffer.h"
 #include "Vector.h"
+#include "PickManager.h"
 #include "BlackEngine.h"
 #include "Message.h"
 #include "Rect.h"

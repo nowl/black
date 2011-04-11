@@ -12,7 +12,7 @@ BlackEngine::BlackEngine()
       TicksPerSecond(DEFAULT_TICKS_PER_SECOND),
       MillisecondsPerTick(1000.0 / TicksPerSecond),
       GraphicsCon(NULL), ActiveGameState(NULL),
-      Cam(NULL)
+      Cam(NULL), FieldOfVision(60)
 {
 }
 
@@ -55,7 +55,7 @@ BlackEngine::getGameState(const string name)
     if(iter == GameStates.end())
     {
         // doesn't exist, create this gamestate and return it
-        GameState *gs = new GameState(name); 
+        GameState *gs = new GameState(name);
         GameStates[name] = gs;
         return gs;
     }
@@ -67,6 +67,12 @@ GraphicsContext*
 BlackEngine::getGraphicsContext()
 {
     return GraphicsCon;
+}
+
+PickManager *
+BlackEngine::getPickManager()
+{
+    return PickManager::get();
 }
 
 unsigned int
@@ -92,7 +98,7 @@ void
 BlackEngine::mainloop()
 {
     // TODO: check for ActiveGameState and possibly throw an exception
-    
+
     unsigned long next_game_tick = getMilliseconds();
 
     glMatrixMode( GL_MODELVIEW );
@@ -100,7 +106,7 @@ BlackEngine::mainloop()
     while(IsRunning)
     {
         handleEvents();
-        
+
         int loops = 0;
         unsigned long tick = getMilliseconds();
         while(tick > next_game_tick && loops < MaxFrameSkip)
@@ -114,7 +120,7 @@ BlackEngine::mainloop()
         }
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-        
+
         float interpolation = (tick + MillisecondsPerTick - next_game_tick)/MillisecondsPerTick;
         render(interpolation);
 
@@ -170,4 +176,16 @@ Camera *
 BlackEngine::getCamera()
 {
     return Cam;
+}
+
+void
+BlackEngine::setFieldOfVision(float fieldOfVision)
+{
+    FieldOfVision = fieldOfVision;
+}
+
+float
+BlackEngine::getFieldOfVision()
+{
+    return FieldOfVision;
 }

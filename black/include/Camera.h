@@ -9,6 +9,13 @@ public:
     virtual ~Camera() {};
 
     virtual void setView() = 0;
+
+    struct Point
+    {
+        float x, y, z;
+    };
+
+    virtual Point getPosition() = 0;
 };
 
 #endif  // __CAMERA_H__
