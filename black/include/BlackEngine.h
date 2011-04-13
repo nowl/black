@@ -33,7 +33,7 @@ public:
     void setCamera(Camera *camera);
     Camera *getCamera();
 
-    void render(float interpolation);
+    void render(float interpolation, ObjectManager::RenderType type);
 
     bool IsRunning;
 

@@ -13,6 +13,12 @@ class ObjectManager
 public:
     typedef std::map<unsigned long, GameObject*>::iterator ObjectIter;
 
+    enum RenderType
+    {
+        DRAW,
+        PICKING
+    };
+
     ObjectManager();
     ~ObjectManager();
 
@@ -22,7 +28,7 @@ public:
     void addManagedObject(GameObject *obj);
 
     void update(unsigned int tick);
-    void render(float interpolation);
+    void render(float interpolation, RenderType renderType);
 
     void sendSync(const Message& message);
     void sendASync(const Message& message);

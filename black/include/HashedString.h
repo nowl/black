@@ -1,7 +1,7 @@
 #ifndef __HASHED_STRING_H__
 #define __HASHED_STRING_H__
 
-#define LOG_MESSAGES
+//#define LOG_MESSAGES
 
 #include <iostream>
 #include <map>

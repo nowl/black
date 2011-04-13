@@ -122,7 +122,7 @@ BlackEngine::mainloop()
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
         float interpolation = (tick + MillisecondsPerTick - next_game_tick)/MillisecondsPerTick;
-        render(interpolation);
+        render(interpolation, ObjectManager::DRAW);
 
         SDL_GL_SwapBuffers();
     }
@@ -143,9 +143,9 @@ BlackEngine::handleEvents()
 }
 
 void
-BlackEngine::render(float interpolation)
+BlackEngine::render(float interpolation, ObjectManager::RenderType type)
 {
-    ActiveGameState->render(interpolation);
+    ActiveGameState->render(interpolation, type);
 }
 
 bool

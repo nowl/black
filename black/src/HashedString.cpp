@@ -6,13 +6,13 @@ using namespace std;
 
 #ifdef LOG_MESSAGES
 map<unsigned long, string> HashedString::ReverseMappings;
-#endif
 
 void
 HashedString::fillReverseMappings()
 {
     ReverseMappings[mHash] = mString;
 }
+#endif
 
 HashedString::HashedString(const string& string)
     : mString(string), mHash( hash(string.c_str()) )

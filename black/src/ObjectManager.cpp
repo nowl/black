@@ -50,7 +50,7 @@ ObjectManager::update(unsigned int tick)
 }
 
 void
-ObjectManager::render(float interpolation)
+ObjectManager::render(float interpolation, RenderType renderType)
 {
     GraphicsContext *gc = BlackEngine::get()->getGraphicsContext();
     Camera *camera = BlackEngine::get()->getCamera();
@@ -60,13 +60,16 @@ ObjectManager::render(float interpolation)
         GameObject *obj = iter->second;
 
         glPushMatrix();
-        
+
         glLoadIdentity();
 
-        // set up view if available
+        // set up view and perspective if available
         if(camera)
-            camera->setView();
-        
+        {
+            camera->setPerspectiveView(obj, renderType);
+            camera->setView(obj, renderType);
+        }
+
         obj->render(*gc, interpolation);
 
         glPopMatrix();

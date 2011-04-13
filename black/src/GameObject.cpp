@@ -49,9 +49,20 @@ GameObject::getName() const
     return Name.getString();
 }
 
-unsigned long 
+unsigned long
 GameObject::getHash() const
 {
     return Name.getHash();
 }
 
+void
+GameObject::setPerspectiveType(std::string type)
+{
+    perspectiveType = type;
+}
+
+std::string
+GameObject::getPerspectiveType() const
+{
+    return perspectiveType;
+}

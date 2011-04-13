@@ -8,7 +8,8 @@ public:
 
     virtual ~Camera() {};
 
-    virtual void setView() = 0;
+    virtual void setView(GameObject *obj, ObjectManager::RenderType type) = 0;
+    virtual void setPerspectiveView(GameObject *obj, ObjectManager::RenderType type) = 0;
 
     struct Point
     {

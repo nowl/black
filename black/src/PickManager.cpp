@@ -50,7 +50,7 @@ void list_hits(GLint hits, GLuint *names)
  				);
 
  	printf("\n");
- }
+}
 
 void
 PickManager::getPicks(int x, int y, vector<string>& objs)
@@ -70,11 +70,10 @@ PickManager::getPicks(int x, int y, vector<string>& objs)
  		glLoadIdentity();
 
  		gluPickMatrix(x, y, 1.0, 1.0, view);
- 		gluPerspective(BlackEngine::get()->getFieldOfVision(), 1.0, 0.0001, 1000.0);
 
  		glMatrixMode(GL_MODELVIEW);
 
- 	    BlackEngine::get()->render(0);
+ 	    BlackEngine::get()->render(0, ObjectManager::PICKING);
 
  		glMatrixMode(GL_PROJECTION);
  	glPopMatrix();

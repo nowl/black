@@ -97,6 +97,7 @@ GraphicsContext::setOrthoView(const Rect& rect)
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
     glOrtho(rect.left, rect.right, rect.top, rect.bottom, -1.0f, 1.0f);
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void
@@ -105,6 +106,7 @@ GraphicsContext::setPerspectiveView(double fovy, double aspect, double zNear, do
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
     gluPerspective(fovy, aspect, zNear, zFar);
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void

@@ -42,9 +42,9 @@ GameState::update(unsigned int tick)
 }
 
 void
-GameState::render(float interpolation)
+GameState::render(float interpolation, ObjectManager::RenderType type)
 {
-    OM.render(interpolation);
+    OM.render(interpolation, type);
 }
 
 void

@@ -24,13 +24,15 @@ public:
     void addManagedObject(GameObject *obj);
 
     void update(unsigned int tick);
-    void render(float interpolation);
+    void render(float interpolation, ObjectManager::RenderType type);
 
     void sendSync(const Message& message);
     void sendASync(const Message& message);
 
     void registerBroadcastReceiver(const char *type, GameObject* obj);
     //void removeBroadcastReceiver(GameObject* obj);
+
+    typedef void (*RenderHook)(void);
 
 private:
     GameState(const GameState&);
